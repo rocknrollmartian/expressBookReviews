@@ -18,7 +18,7 @@ public_users.post("/register", (req,res) => {
     } else {
       return res.status(404).json({message: "Customer with same username already exists!"});    
     }
-  }
+}
   return res.status(404).json({message: "Unable to register customer."});
 
 });
@@ -90,16 +90,8 @@ public_users.get('/title/:title',function (req, res) {
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  const isbn = req.params.isbn;
-  const review = books[isbn].reviews;
-  
-  if(review) {
-      res.send(review);
-  } else {
-      res.status(404).json({messgae:"Review not found"});
-  }
-
-  return res.status(300).json({message: "Yet to be implemented"});
+    const isbn = req.params.isbn;
+    res.send(books[isbn]["reviews"])
 });
 
 module.exports.general = public_users;
