@@ -15,6 +15,7 @@ app.use("/customer/auth/*", function auth(req,res,next){
 const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
 
+
 if(req.session.authrization){
     const token = req.session.authrization['accesstoken'];
     jwt.verify(token, 'access', (err, user) => {

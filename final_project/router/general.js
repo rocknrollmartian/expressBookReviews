@@ -10,30 +10,26 @@ public_users.post("/register", (req,res) => {
   const username = req.body.username;
   const password = req.body.password;
   
-  if(username && password) {
-    //check if username is already taken
-    if(!isValid(username)) {
-      return res.status(400).json({message: "Username already taken"});
+  if (username && password) {
+   
+    if (!isValid(username)) {
+      users.push({"username":username,"password":password});
+      return res.status(200).json({message: "Customer successfully registred. Now you can login"});
     } else {
-      //add username and password to users object
-      users.push({username: username, password: password});
-      return res.status(200).json({message: "User registered successfully"});
+      return res.status(404).json({message: "Customer with same username already exists!"});    
     }
-  } else {
-    return res.status(400).json({message: "Invalid username"});
   }
-  return res.status(300).json({message: "Yet to be implemented"});
+  return res.status(404).json({message: "Unable to register customer."});
+
 });
 
 // Get the book list available in the shop
-public_users.get('/',function (req, res) {
-  //Write your code here
-  const get_books = new Promise((resolve, reject) => {
-    resolve(res.send(JSON.stringify({books}, null, 3)));
-  });
-    get_books.then(() =>  console.log("Promise for Task 10 resolved"));
-
-  return res.status(300).json({message: "Yet to be implemented"});
+  public_users.get('/',function (req, res) {
+    //Write your code here
+   public_users.get('/review/:isbn',function (req, res) {
+      const isbn = req.params.isbn;
+      res.send(books[isbn]["reviews"])
+    });  
 });
 
 // Get book details based on ISBN
