@@ -55,11 +55,9 @@ regd_users.post("/login", (req,res) => {
           username,
       };
       return res.status(200).send("User successfully logged in");
-  } else {
-      return res
-          res.status(208)
-          res.json({ message: "Invalid Login. Check username and password" });
-  }
+    } else {
+        return res.status(208).send("Invalid Login. Check username and password");
+}
 });
 
 // Add a book review
